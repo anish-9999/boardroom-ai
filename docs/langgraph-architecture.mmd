@@ -1,0 +1,42 @@
+flowchart TB
+  U[User] -->|Question + Personas| API[Backend API]
+  API -->|Build Graph Inputs| ORCH[Orchestrator Node]
+
+  subgraph LG[LangGraph StateGraph]
+    ORCH -->|Dispatch R1| R1P[Round 1 Personas - parallel]
+    R1P --> AGG1[Round 1 Aggregate]
+    AGG1 -->|Low confidence or missing info| ASK[Ask User for Context]
+    ASK --> ORCH
+    AGG1 -->|Needs debate| R2P[Round 2 Personas - parallel]
+    R2P --> AGG2[Round 2 Aggregate]
+    AGG2 --> FINAL[Final Synthesis + Scoring]
+  end
+
+  subgraph LC[LangChain Agents]
+    ORCH --> OC[Orchestrator Chain]
+    R1P --> PC[Persona Chains]
+    R2P --> PC
+  end
+
+  subgraph TOOLS[Tools]
+    CONS[Consensus Scorer]
+    RISK[Risk Scorer]
+    EVID[Evidence Extractor]
+  end
+
+  ORCH --> CONS
+  ORCH --> RISK
+  ORCH --> EVID
+
+  subgraph STATE[Graph State]
+    S[(State Store)]
+  end
+
+  ORCH --- S
+  R1P --- S
+  AGG1 --- S
+  R2P --- S
+  AGG2 --- S
+  FINAL --- S
+
+  FINAL --> API --> UI[Frontend Results]
