@@ -18,12 +18,19 @@ class CouncilRequest(BaseModel):
     personas: Optional[List[PersonaInput]] = None
     model: Optional[str] = Field(None, description="Model identifier such as llama-3.3-70b-versatile")
     temperature: Optional[float] = Field(0.4, ge=0.0, le=1.0)
+    needs_debate: Optional[float] = Field(
+        0.75,
+        ge=0.0,
+        le=1.0,
+        description="0-1 score; if > 0.5, round 2 debate runs.",
+    )
 
 
 class CouncilResponse(BaseModel):
     round1: Dict[str, str]
     round2: Dict[str, str]
     final: str
+    metadata: Dict[str, object] = Field(default_factory=dict)
 
 
 class OptionsResponse(BaseModel):

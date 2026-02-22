@@ -5,7 +5,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from app import council
+from app import council, orchestrator
 from app.config import MODEL_OPTIONS, Persona
 from app.schemas import CouncilRequest, CouncilResponse, OptionsResponse, PersonaInput
 
@@ -41,11 +41,14 @@ async def run_boardroom(payload: CouncilRequest) -> CouncilResponse:
         personas = council.DEFAULT_PERSONAS
 
     try:
-        result = council.run_council(
+        temperature = payload.temperature if payload.temperature is not None else 0.4
+        needs_debate = payload.needs_debate if payload.needs_debate is not None else 0.75
+        result = orchestrator.run_orchestrator(
             question=payload.question,
             personas=personas,
             model=payload.model,
-            temperature=payload.temperature or 0.4,
+            temperature=temperature,
+            needs_debate=needs_debate,
         )
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc))

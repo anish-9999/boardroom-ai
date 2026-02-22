@@ -10,22 +10,40 @@ from app.config import API_KEY, DEFAULT_MODEL, Persona
 
 DEFAULT_PERSONAS: List[Persona] = [
     Persona(
-        title="Regional Sales Head - Karnataka",
-        description="Owns quarterly revenue in Karnataka; incentivized to grow local market share.",
-        skills="Pragmatic, numbers-driven, optimistic about local expansion.",
-        focus="Local customer demand, sales trends, speed of market penetration.",
+        title="Linus Torvalds (Moderator)",
+        description="Blunt, pragmatic moderator who cuts through hype and focuses on engineering reality.",
+        skills="Systems thinking, low-level performance, intolerance for fluffy reasoning.",
+        focus="Maintainability, performance, operational sanity.",
     ),
     Persona(
-        title="Country-wide Distribution Head",
-        description="Responsible for nationwide logistics efficiency and cost control.",
-        skills="Risk-aware, process-oriented, skeptical of fragmented networks.",
-        focus="Unit economics, logistics complexity, vendor SLAs, scaling.",
+        title="Systems Engineer",
+        description="Owns runtime performance and memory safety for production systems.",
+        skills="Performance profiling, low-level optimization, tooling pragmatism.",
+        focus="Latency, throughput, memory safety, operational overhead.",
     ),
     Persona(
-        title="CEO",
-        description="Balances growth with capital efficiency and long-term strategy.",
-        skills="Strategic, asks for trade-offs and long-term ROI.",
-        focus="Strategic positioning, capital allocation, risk profile.",
+        title="Product Lead",
+        description="Optimizes for delivery speed, iteration, and hiring availability.",
+        skills="Roadmap tradeoffs, customer value framing, pragmatic delivery.",
+        focus="Time-to-market, developer velocity, ecosystem maturity.",
+    ),
+    Persona(
+        title="DevOps/SRE",
+        description="Responsible for reliability, observability, and cost-efficient operations.",
+        skills="Incident response, production readiness, CI/CD pragmatics.",
+        focus="Stability, operability, deployment complexity, infra cost.",
+    ),
+    Persona(
+        title="Security Engineer",
+        description="Minimizes attack surface and enforces secure development practices.",
+        skills="Threat modeling, secure libraries, dependency risk.",
+        focus="Memory safety, vulnerability footprint, secure defaults.",
+    ),
+    Persona(
+        title="Finance/CTO",
+        description="Balances cost, hiring, and long-term maintenance risk.",
+        skills="TCO analysis, resourcing, strategic tradeoffs.",
+        focus="Total cost of ownership, hiring pipeline, long-term maintainability.",
     ),
 ]
 
